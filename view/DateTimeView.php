@@ -11,7 +11,7 @@ class DateTimeView {
         The time is [Hour]:[minutes]:[Seconds].
         Example: "Monday, the 8th of July 2015, The time is 10:59:21"
          */
-		$timeString = date("l, jS \of F Y,") . " The time is " . date("H:i:s");
+		$timeString = date('l, \t\h\e jS \of F Y,') . ' The time is ' . date('H:i:s');
 
 		return '<p>' . $timeString . '</p>';
 	}
