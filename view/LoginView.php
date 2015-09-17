@@ -22,15 +22,19 @@ class LoginView {
 	public function response() {
 		$message = '';
 
-		if (!$this->getRequestUserName()) {
+		if ($this->checkIfPostIsEmpty()) {
 
-			$message = "Username is missing";
+			if (!$this->getRequestUserName()) {
+
+				$message = "Username is missing";
+			}
+
+			if (!$this->getRequestPassword() && $this->getRequestUserName()) {
+
+				$message = "Password is missing";
+			}
 		}
 
-		if (!$this->getRequestPassword() && $this->getRequestUserName()) {
-
-			$message = "Password is missing";
-		}
 
 		$response = $this->generateLoginFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -79,6 +83,17 @@ class LoginView {
 	}
 
 	//TODO: Create GET-FUNCTIONS TO FETCH REQUEST VARIABLES
+	//
+	private function checkIfPostIsEmpty()	{
+
+		if (isset($_POST) && !empty($_POST)) {
+
+			return true;
+		}
+		else {
+			return null;
+		}
+	}
 
 	private function getRequestUserName() {
 
