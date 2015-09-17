@@ -78,9 +78,9 @@ class LoginView {
 
 	private function getRequestUserName() {
 
-		if (isset($_POST['LoginView::UserName']) && !empty($_POST['LoginView::UserName'])) {
+		if (isset($_POST[self::$name]) && !empty($_POST[self::$name])) {
 
-			return $_POST['LoginView::UserName'];
+			return $_POST[self::$name];
 		}
 		else {
 
