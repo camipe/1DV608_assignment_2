@@ -13,4 +13,19 @@ class User {
        $this->password = "Password";
     }
 
+    public function validateCredentials($username, $password)
+    {
+        if ($username == $this->username) {
+
+            if ($password == $this->password) {
+
+                return true;
+            }
+        }
+        else {
+
+            return false;
+        }
+    }
+
 }

@@ -83,19 +83,9 @@ class LoginView {
 	}
 
 	//TODO: Create GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	//
-	private function checkIfPostIsEmpty()	{
+	//TODO: Sanitize input
 
-		if (isset($_POST) && !empty($_POST)) {
-
-			return true;
-		}
-		else {
-			return null;
-		}
-	}
-
-	private function getRequestUserName() {
+	public function getRequestUserName() {
 
 		if (isset($_POST[self::$name]) && !empty($_POST[self::$name])) {
 
@@ -104,11 +94,10 @@ class LoginView {
 		else {
 
 			return null;
-
 		}
 	}
 
-	private function getRequestPassword() {
+	public function getRequestPassword() {
 
 		if (isset($_POST[self::$password]) && !empty($_POST[self::$password])) {
 
@@ -117,8 +106,34 @@ class LoginView {
 		else {
 
 			return null;
-
 		}
+	}
+
+	private function checkIfPostIsEmpty() {
+
+		if (isset($_POST) && !empty($_POST)) {
+
+			return true;
+		}
+		else {
+
+			return null;
+		}
+	}
+
+	public function userWantsToLogin() {
+
+		if (isset($_POST[self::$login]) && !empty($_POST[self::$login])) {
+
+			return true;
+		}
+		else {
+
+			return false;
+		}
+
+
+
 	}
 
 }

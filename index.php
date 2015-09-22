@@ -1,6 +1,10 @@
 <?php
 
 //INCLUDE THE FILES NEEDED...
+require_once('controller/LoginController.php');
+
+require_once('model/User.php');
+
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
@@ -10,10 +14,16 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //CREATE OBJECTS OF THE VIEWS
-$v = new LoginView();
-$dtv = new DateTimeView();
-$lv = new LayoutView();
+$loginView = new \view\LoginView();
+$dateTimeView = new \view\DateTimeView();
+$layoutView = new \view\LayoutView();
 
+// Dummy user for testing login
 
-$lv->render(false, $v, $dtv);
+$user = new \model\user();
 
+$loginController = new \controller\LoginController($user, $loginView);
+
+$loginController->doLogin();
+
+$layoutView->render(false, $loginView, $dateTimeView);
