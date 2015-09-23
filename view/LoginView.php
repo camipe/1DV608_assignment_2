@@ -53,6 +53,10 @@ class LoginView {
 
 		}
 
+		if ($this->userWantsToLogout()) {
+			$message = "Bye bye!";
+		}
+
 		if ($this->user->getLoginStatusFromSession()) {
 
 			$response = $this->generateLogoutButtonHTML($message);
@@ -133,7 +137,7 @@ class LoginView {
 
 	public function userWantsToLogout() {
 
-		if (isset($_POST[self::$logout]) && !empty($_POST[self::$logout])) {
+		if (isset($_POST[self::$logout])) {
 
 			return true;
 		}
