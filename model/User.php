@@ -6,6 +6,7 @@ class User {
 
     private $username;
     private $password;
+    private $isLoggedIn = false;
 
     public function __construct() {
 
@@ -19,6 +20,7 @@ class User {
 
             if ($password == $this->password) {
 
+                $this->isLoggedIn = true;
                 return true;
             }
         }
@@ -26,6 +28,11 @@ class User {
 
             return false;
         }
+    }
+
+    public function getLoginStatus()
+    {
+        return $this->isLoggedIn;
     }
 
 }

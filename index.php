@@ -26,4 +26,4 @@ $loginController = new \controller\LoginController($user, $loginView);
 
 $loginController->doLogin();
 
-$layoutView->render(false, $loginView, $dateTimeView);
+$layoutView->render($user->getLoginStatus(), $loginView, $dateTimeView);

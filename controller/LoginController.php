@@ -18,16 +18,8 @@ class LoginController {
     {
 
         if ($this->loginView->userWantsToLogin()) {
-            if ($this->user->validateCredentials($this->loginView->getRequestUserName(),
-                                            $this->loginView->getRequestPassword())) {
-                $this->user->isLoggedIn = true;
-
-            }
-            else {
-                $this->user->isLoggedIn = false;
-
-            }
+            $this->user->validateCredentials($this->loginView->getRequestUserName(),
+                                            $this->loginView->getRequestPassword());
         }
-
     }
 }
