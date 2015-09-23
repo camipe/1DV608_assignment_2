@@ -12,6 +12,12 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
+	private $user;
+
+	public function __construct(\model\User $user) {
+
+		$this->user = $user;
+	}
 
 
 	/**
@@ -26,6 +32,10 @@ class LoginView {
 
 		if ($this->userWantsToLogin()) {
 
+			if (!$this->user->getLoginStatus()) {
+				$message = "Wrong name or password";
+			}
+
 			if (!$this->getRequestUserName()) {
 
 				$message = "Username is missing";
@@ -35,10 +45,24 @@ class LoginView {
 
 				$message = "Password is missing";
 			}
+
+
+			if ($this->user->getLoginStatus()) {
+				$message = "Welcome";
+			}
+
 		}
 
-		$response = $this->generateLoginFormHTML($message);
-		//$response .= $this->generateLogoutButtonHTML($message);
+		if ($this->user->getLoginStatusFromSession()) {
+
+			$response = $this->generateLogoutButtonHTML($message);
+		} else {
+
+			$response = $this->generateLoginFormHTML($message);
+		}
+
+
+
 		return $response;
 	}
 
@@ -105,9 +129,18 @@ class LoginView {
 
 			return false;
 		}
+	}
 
+	public function userWantsToLogout() {
 
+		if (isset($_POST[self::$logout]) && !empty($_POST[self::$logout])) {
 
+			return true;
+		}
+		else {
+
+			return false;
+		}
 	}
 
 }

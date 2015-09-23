@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //INCLUDE THE FILES NEEDED...
 require_once('controller/LoginController.php');
 
@@ -13,17 +15,17 @@ require_once('view/LayoutView.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-//CREATE OBJECTS OF THE VIEWS
-$loginView = new \view\LoginView();
-$dateTimeView = new \view\DateTimeView();
-$layoutView = new \view\LayoutView();
-
 // Dummy user for testing login
 
 $user = new \model\user();
+
+//CREATE OBJECTS OF THE VIEWS
+$loginView = new \view\LoginView($user);
+$dateTimeView = new \view\DateTimeView();
+$layoutView = new \view\LayoutView();
 
 $loginController = new \controller\LoginController($user, $loginView);
 
 $loginController->doLogin();
 
-$layoutView->render($user->getLoginStatus(), $loginView, $dateTimeView);
+$layoutView->render($user->getLoginStatusFromSession(), $loginView, $dateTimeView);

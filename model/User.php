@@ -21,6 +21,8 @@ class User {
             if ($password == $this->password) {
 
                 $this->isLoggedIn = true;
+                $this->setLoginStatusInSession();
+
                 return true;
             }
         }
@@ -30,9 +32,23 @@ class User {
         }
     }
 
-    public function getLoginStatus()
-    {
+    public function logout()    {
+
+        session_unset();
+        session_destroy();
+    }
+
+    public function getLoginStatus() {
         return $this->isLoggedIn;
     }
 
+    public function getLoginStatusFromSession() {
+
+        return (isset($_SESSION['isLoggedIn'])) ? $_SESSION['isLoggedIn'] : false;
+    }
+
+    public function setLoginStatusInSession() {
+
+        $_SESSION['isLoggedIn'] = $this->isLoggedIn;
+    }
 }

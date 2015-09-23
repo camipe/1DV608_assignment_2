@@ -21,5 +21,9 @@ class LoginController {
             $this->user->validateCredentials($this->loginView->getRequestUserName(),
                                             $this->loginView->getRequestPassword());
         }
+
+        if ($this->loginView->userWantsToLogout()) {
+            $this->user->logout();
+        }
     }
 }
