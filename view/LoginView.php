@@ -30,6 +30,7 @@ class LoginView {
 	 */
 	public function response() {
 
+		// If the user isn't logged in, checking if form fields are empty
 		if (!$this->user->getLoginStatusFromSession() && $this->userWantsToLogin()) {
 
 			if (!$this->user->getLoginStatusFromSession()) {
@@ -97,43 +98,72 @@ class LoginView {
 		';
 	}
 
-	//TODO: Create GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	//TODO: Sanitize input
-
+    /**
+     * [getRequestUserName description]
+     * @return string
+     */
 	public function getRequestUserName() {
 		return (isset($_POST[self::$name])) ? $_POST[self::$name] : "";
 	}
 
+	/**
+	 * [getRequestPassword description]
+	 * @return string
+	 */
 	public function getRequestPassword() {
 		return (isset($_POST[self::$password])) ? $_POST[self::$password] : "";
 	}
 
+	/**
+	 * [userWantsToLogin description]
+	 * @return bool
+	 */
 	public function userWantsToLogin() {
 		return (isset($_POST[self::$login])) ? true : false;
 	}
 
+	/**
+	 * [userWantsToLogout description]
+	 * @return bool
+	 */
 	public function userWantsToLogout() {
 		return (isset($_POST[self::$logout])) ? true : false;
 	}
 
 	// Messages
 	// TODO: Move to own class?
+
+	/**
+	 * @return void BUT sets message variable on the object
+	 */
 	public function setMessageUsernameMissing() {
 		$this->message = "Username is missing";
 	}
 
+	/**
+	 * @return void BUT sets message variable on the object
+	 */
 	public function setMessagePasswordMissing() {
 		$this->message = "Password is missing";
 	}
 
+	/**
+	 * @return void BUT sets message variable on the object
+	 */
 	public function setMessageLoginSuccess() {
 		$this->message = "Welcome";
 	}
 
+	/**
+	 * @return void BUT sets message variable on the object
+	 */
 	public function setMessageLoginFailed() {
 		$this->message = "Wrong name or password";
 	}
 
+	/**
+	 * @return void BUT sets message variable on the object
+	 */
 	public function setMessageLogoutSuccess() {
 		$this->message = "Bye bye!";
 	}

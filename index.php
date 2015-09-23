@@ -16,7 +16,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 // Dummy user for testing login
-
 $user = new \model\user();
 
 //CREATE OBJECTS OF THE VIEWS
