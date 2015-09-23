@@ -115,7 +115,6 @@ class LoginView {
 	//TODO: Sanitize input
 
 	public function getRequestUserName() {
-
 		return (isset($_POST[self::$name])) ? $_POST[self::$name] : "";
 	}
 
@@ -124,27 +123,11 @@ class LoginView {
 	}
 
 	public function userWantsToLogin() {
-
-		if (isset($_POST[self::$login])) {
-
-			return true;
-		}
-		else {
-
-			return false;
-		}
+		return (isset($_POST[self::$login])) ? true : false;
 	}
 
 	public function userWantsToLogout() {
-
-		if (isset($_POST[self::$logout])) {
-
-			return true;
-		}
-		else {
-
-			return false;
-		}
+		return (isset($_POST[self::$logout])) ? true : false;
 	}
 
 }
