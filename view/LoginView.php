@@ -88,38 +88,12 @@ class LoginView {
 
 	public function getRequestUserName() {
 
-		if (isset($_POST[self::$name]) && !empty($_POST[self::$name])) {
-
-			return $_POST[self::$name];
-		}
-		else {
-
-			return null;
-		}
+		return (isset($_POST[self::$name])) ? $_POST[self::$name] : "";
 	}
 
 	public function getRequestPassword() {
 
-		if (isset($_POST[self::$password]) && !empty($_POST[self::$password])) {
-
-			return $_POST[self::$password];
-		}
-		else {
-
-			return null;
-		}
-	}
-
-	private function checkIfPostIsEmpty() {
-
-		if (isset($_POST) && !empty($_POST)) {
-
-			return true;
-		}
-		else {
-
-			return null;
-		}
+		return (isset($_POST[self::$password]) ? isset($_POST[self::$password] : "";
 	}
 
 	public function userWantsToLogin() {
