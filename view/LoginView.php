@@ -13,6 +13,7 @@ class LoginView {
 	private static $messageId = 'LoginView::Message';
 
 	private $user;
+	private $message;
 
 	public function __construct(\model\User $user) {
 
@@ -28,40 +29,37 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-		$message = '';
 
-		if ($this->userWantsToLogin()) {
+		if (!$this->user->getLoginStatusFromSession() && $this->userWantsToLogin()) {
 
-			if (!$this->user->getLoginStatus()) {
-				$message = "Wrong name or password";
+			if (!$this->user->getLoginStatusFromSession()) {
+				echo "1";
+				$this->setMessageLoginFailed();
 			}
 
 			if (!$this->getRequestUserName()) {
-
-				$message = "Username is missing";
+				echo "2";
+				$this->setMessageUsernameMissing();
 			}
 
 			if (!$this->getRequestPassword() && $this->getRequestUserName()) {
-
-				$message = "Password is missing";
+				echo "3";
+				$this->setMessagePasswordMissing();
 			}
 
-
-			if ($this->user->getLoginStatus()) {
-				$message = "Welcome";
-			}
+			$this->setMessageLoginSuccess();
 
 		}
 
-		if ($this->userWantsToLogout()) {
-			$message = "Bye bye!";
+		if ($this->user->getLoginStatusFromSession() && $this->userWantsToLogout()) {
+			$this->setMessageLogoutSuccess();
 		}
+
+		$message = $this->message;
 
 		if ($this->user->getLoginStatusFromSession()) {
-
 			$response = $this->generateLogoutButtonHTML($message);
 		} else {
-
 			$response = $this->generateLoginFormHTML($message);
 		}
 
@@ -128,6 +126,28 @@ class LoginView {
 
 	public function userWantsToLogout() {
 		return (isset($_POST[self::$logout])) ? true : false;
+	}
+
+	// Messages
+	// TODO: Move to own class?
+	public function setMessageUsernameMissing() {
+		$this->message = "Username is missing";
+	}
+
+	public function setMessagePasswordMissing() {
+		$this->message = "Password is missing";
+	}
+
+	public function setMessageLoginSuccess() {
+		$this->message = "Welcome";
+	}
+
+	public function setMessageLoginFailed() {
+		$this->message = "Wrong name or password";
+	}
+
+	public function setMessageLogoutSuccess() {
+		$this->message = "Bye bye!";
 	}
 
 }
