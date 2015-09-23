@@ -33,26 +33,16 @@ class LoginView {
 		if (!$this->user->getLoginStatusFromSession() && $this->userWantsToLogin()) {
 
 			if (!$this->user->getLoginStatusFromSession()) {
-				echo "1";
 				$this->setMessageLoginFailed();
 			}
 
 			if (!$this->getRequestUserName()) {
-				echo "2";
 				$this->setMessageUsernameMissing();
 			}
 
 			if (!$this->getRequestPassword() && $this->getRequestUserName()) {
-				echo "3";
 				$this->setMessagePasswordMissing();
 			}
-
-			$this->setMessageLoginSuccess();
-
-		}
-
-		if ($this->user->getLoginStatusFromSession() && $this->userWantsToLogout()) {
-			$this->setMessageLogoutSuccess();
 		}
 
 		$message = $this->message;
