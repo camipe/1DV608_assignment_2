@@ -17,7 +17,6 @@ class LoginController {
     public function doLogin()
     {
 
-        var_dump($this->loginView->userWantsToLogin());
         if ($this->loginView->userWantsToLogin()) {
             if ($this->user->validateCredentials($this->loginView->getRequestUserName(),
                                             $this->loginView->getRequestPassword())) {
