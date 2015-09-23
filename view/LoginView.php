@@ -24,7 +24,7 @@ class LoginView {
 	public function response() {
 		$message = '';
 
-		if ($this->checkIfPostIsEmpty()) {
+		if ($this->userWantsToLogin()) {
 
 			if (!$this->getRequestUserName()) {
 

@@ -13,14 +13,22 @@ class LoginController {
         $this->user = $user;
         $this->loginView = $loginView;
     }
-
+    // TODO: Implement model state change, Is logged in etc.
     public function doLogin()
     {
-        if ($this->user->validateCredentials($this->loginView->getRequestUserName(),
+
+        var_dump($this->loginView->userWantsToLogin());
+        if ($this->loginView->userWantsToLogin()) {
+            if ($this->user->validateCredentials($this->loginView->getRequestUserName(),
                                             $this->loginView->getRequestPassword())) {
-            echo "Logged in";
+            // $this->user->isLoggedIn = true;
+            echo "1";
+            }
+            else {
+                //$this->user->isLoggedIn = false;
+                echo "2";
+            }
         }
-        else {echo "Not logged in";}
 
     }
 }
