@@ -16,7 +16,7 @@ class LoginController {
 
     public function doLogin()    {
 
-        if ($this->loginView->userWantsToLogin()) {
+        if ($this->loginView->userWantsToLogin() && !$this->user->getLoginStatusFromSession()) {
             $this->user->validateCredentials($this->loginView->getRequestUserName(),
                                             $this->loginView->getRequestPassword());
 
@@ -25,7 +25,7 @@ class LoginController {
             }
         }
 
-        if ($this->loginView->userWantsToLogout()) {
+        if ($this->loginView->userWantsToLogout() && $this->user->getLoginStatusFromSession()) {
             $this->user->logout();
 
             if (!$this->user->getLoginStatusFromSession()) {
